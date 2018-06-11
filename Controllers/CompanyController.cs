@@ -24,7 +24,6 @@ namespace crmApi.Controllers
         }
 
         // GET: api/company
-        // Test comment 2
         [HttpGet]
         public IEnumerable<Company> GetAll()
         {
