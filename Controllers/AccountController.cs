@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using crmApi.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace crmApi.Controllers
 {
     [Route("api/account")]
-    [ApiController]
+    //[ApiController]
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -26,6 +27,7 @@ namespace crmApi.Controllers
 
         // POST: api/Account
         [HttpPost]
+        //[Route("api/Account/Register")]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
@@ -54,42 +56,69 @@ namespace crmApi.Controllers
                     return new ObjectResult(result);
                 }
                 AddErrors(result);
-                return BadRequest(result);
+                return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
             }
             return BadRequest("Invalid content");
         }
 
-        // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+        //// POST: api/Account/Login
+        //[HttpPost("login")]
+        //[AllowAnonymous]
+        ////[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest("Invalid content");
+        //    }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
-            //var user = await UserManager.FindByNameAsync(model.UserName);
-            //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            //var x = User.Identity.GetUserId();
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToAction("DetermineUserPortal", "Account");
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
-        }
+        //    //// This doesn't count login failures towards account lockout
+        //    //// To enable password failures to trigger account lockout, change to shouldLockout: true
+        //    //var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+        //    ////var user = await UserManager.FindByNameAsync(model.UserName);
+        //    ////await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+        //    ////var x = User.Identity.GetUserId();
+        //    //if (result.Succeeded)
+        //    //{
+        //    //    return new ObjectResult(model);
+        //    //}
+        //    ////case Microsoft.AspNetCore.Identity.SignInResult.LockedOut:
+        //    ////    return View("Lockout");
+        //    ////case Microsoft.AspNetCore.Identity.SignInResult.RequiresVerification:
+        //    ////    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+        //    ////case Microsoft.AspNetCore.Identity.SignInResult.Failure:
+        //    //ModelState.AddModelError("", "Invalid login attempt.");
+        //    //return BadRequest("Login failed");
+
+        //    var identity = await GetClaimsIdentity(model.UserName, model.Password);
+        //    if (identity == null)
+        //    {
+        //        return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
+        //    }
+
+        //    var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, model.UserName, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
+        //    return new OkObjectResult(jwt);
+        //}
+
+        //private async Task<ClaimsIdentity> GetClaimsIdentity(string userName, string password)
+        //{
+        //    if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+        //        return await Task.FromResult<ClaimsIdentity>(null);
+
+        //    // get the user to verifty
+        //    var userToVerify = await _userManager.FindByNameAsync(userName);
+
+        //    if (userToVerify == null) return await Task.FromResult<ClaimsIdentity>(null);
+
+        //    // check the credentials
+        //    if (await _userManager.CheckPasswordAsync(userToVerify, password))
+        //    {
+        //        return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id));
+        //    }
+
+        //    // Credentials are invalid, or account doesn't exist
+        //    return await Task.FromResult<ClaimsIdentity>(null);
+        //}
 
         private void AddErrors(IdentityResult result)
         {

@@ -45,7 +45,7 @@ namespace crmApi.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Company item)
         {
-            if (item == null)
+            if(!ModelState.IsValid || item == null)
             {
                 return BadRequest();
             }

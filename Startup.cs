@@ -15,8 +15,21 @@ namespace crmApi
 {
     public class Startup
     {
+        // https://fullstackmark.com/post/13/jwt-authentication-with-aspnet-core-2-web-api-angular-5-net-core-identity-and-facebook-login
         public static IConfigurationRoot Configuration { get; set; }
+
+        private const string SecretKey = "Gg0oE6UH5U2C3dzREZ8R8DbNv84fKj22"; // todo: get this from somewhere secure
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -24,7 +37,11 @@ namespace crmApi
             //var connStr = Configuration.GetSection("Data")
             //               .GetSection("DefaultConnection")["ConnectionString"];
             //services.AddDbContext<CrmContext>(opt => opt.UseSqlServer(connection));
-            services.AddDbContext<CrmContext>(opt => opt.UseSqlServer("Server=DESKTOP-9HQUT28;Database=Crm.WebApi;User Id=ClubSked;Password=ClubSked;MultipleActiveResultSets=True;"));
+
+            //services.AddDbContext<CrmContext>(opt => opt.UseSqlServer("Server=DESKTOP-9HQUT28;Database=Crm.WebApi;User Id=ClubSked;Password=ClubSked;MultipleActiveResultSets=True;"));
+            services.AddDbContext<CrmContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrmDatabase"),
+                b => b.MigrationsAssembly("crmApi")));
+
             services.AddMvc();
 
             // Add service and create Policy with options
