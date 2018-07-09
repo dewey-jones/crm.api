@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "71fe38fc-71d9-4a92-baf7-e3cea63439f5",
+		"name": "CRM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "company",
+			"description": "",
+			"item": [
+				{
+					"name": "companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{BaseUrl}}/api/company",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"company"
+							]
+						},
+						"description": "companies"
+					},
+					"response": []
+				},
+				{
+					"name": "company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{BaseUrl}}/api/company/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"company",
+								"1"
+							]
+						},
+						"description": "get company"
+					},
+					"response": []
+				},
+				{
+					"name": "create company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"CompanyName\": \"test co. 2\",\r\n        \"Sales\": \"\",\r\n        \"Employees\": 0,\r\n        \"Addr1\": \"\",\r\n        \"Addr2\": \"\",\r\n        \"City\": \"\",\r\n        \"State\": \"\",\r\n        \"Zip\": \"\",\r\n        \"Phone\": \"\",\r\n        \"Contact\": false,\r\n        \"Mail\": false,\r\n        \"MailDate\": \"1/1/2001\",\r\n        \"CallOn\": \"1/1/2001\",\r\n        \"CompanyNotes\": \"\",\r\n        \"Rating\": null,\r\n        \"Nearby\": false,\r\n        \"Appropriate\": null,\r\n        \"Consultants\": false,\r\n        \"Contacts\": []\r\n}"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/company",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"company"
+							]
+						},
+						"description": "get company"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "note",
+			"description": "",
+			"item": [
+				{
+					"name": "notes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{BaseUrl}}/api/note",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"note"
+							]
+						},
+						"description": "notes"
+					},
+					"response": []
+				},
+				{
+					"name": "note",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{BaseUrl}}/api/note/1",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"note",
+								"1"
+							]
+						},
+						"description": "note"
+					},
+					"response": []
+				},
+				{
+					"name": "post note",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ContactId\": 91,\n\t\"ContactDate\": \"1/2/2018\",\n\t\"NoteText\": \"nothing\",\n\t\"Contact\": null \n}"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/note",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"note"
+							]
+						},
+						"description": "note"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "account",
+			"description": "",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Email\":\"jbull@gmail.com\",\n\t\"UserName\":\"jbull\",\n\t\"Password\": \"jbullpw\",\n\t\"ConfirmPassword\": \"jbullpw\"\n}\t"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/account",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"account"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "register2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Email\":\"jdoe@gmail.com\",\n\t\"UserName\":\"jdoe\",\n\t\"Password\": \"jdoepw\",\n\t\"ConfirmPassword\": \"jdoepw\"\n}\t"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/account/register",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"UserName\":\"jbull\",\n\t\"Password\": \"jbullpw\"\n}\t"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/account/login",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
