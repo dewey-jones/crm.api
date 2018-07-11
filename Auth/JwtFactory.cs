@@ -47,7 +47,7 @@ namespace crmApi.Auth
         {
             return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
             {
-                new Claim(Constants.Strings.JwtClaimIdentifiers.Id, id),
+                new Claim(Constants.Strings.JwtClaimIdentifiers.Id, id.ToString()),
                 new Claim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess)
             });
         }
