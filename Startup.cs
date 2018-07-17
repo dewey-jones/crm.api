@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using crmApi.Auth;
 
 namespace crmApi
 {
@@ -41,6 +42,8 @@ namespace crmApi
             //services.AddDbContext<CrmContext>(opt => opt.UseSqlServer("Server=DESKTOP-9HQUT28;Database=Crm.WebApi;User Id=ClubSked;Password=ClubSked;MultipleActiveResultSets=True;"));
             services.AddDbContext<CrmContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CrmDatabase"),
                 b => b.MigrationsAssembly("crmApi")));
+
+            services.AddSingleton<IJwtFactory, JwtFactory>();
 
             services.AddMvc();
 
