@@ -25,9 +25,16 @@ namespace crmApi.Controllers
 
         // GET: api/company
         [HttpGet]
-        public IEnumerable<Company> GetAll()
+        public IEnumerable<Company> GetAll(string sort="none")
         {
-            return _context.Companies.ToList();
+            IQueryable<Company> q = _context.Companies.AsQueryable();
+            switch(sort.ToLower()) {
+                case "name":
+                    return q.OrderBy(s => s.CompanyName);
+                case "rating":
+                    return q.OrderBy(s => s.Rating);
+            }
+            return q.ToList();
         }
 
         // GET api/company/5

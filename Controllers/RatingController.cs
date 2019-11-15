@@ -22,9 +22,15 @@ namespace crmApi.Controllers
 
         // GET: api/Rating
         [HttpGet]
-        public IEnumerable<Rating> GetRatings()
+        public IEnumerable<Rating> GetRatings(string sort="none")
         {
-            return _context.Ratings;
+            IQueryable<Rating> q = _context.Ratings.AsQueryable();
+            switch (sort.ToLower())
+            {
+                case "value":
+                    return q.OrderBy(s => s.RatingValue);
+            }
+            return q.ToList();
         }
 
         // GET: api/Rating/5
