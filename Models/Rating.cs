@@ -12,5 +12,6 @@ namespace crmApi.Models
         public long Id { get; set; }
         public int RatingValue { get; set; }
         public string Description { get; set; }
+        public string IconName { get; set; }
     }
 }
