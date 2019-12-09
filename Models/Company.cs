@@ -22,7 +22,7 @@ namespace crmApi.Models
         public DateTime MailDate { get; set; }
         public DateTime CallOn { get; set; }
         public string CompanyNotes { get; set; }
-        public Nullable<int> Rating { get; set; }
+        public Nullable<int> RatingValue { get; set; }
         public bool Nearby { get; set; }
         public Nullable<int> Appropriate { get; set; }
         public bool Consultants { get; set; }

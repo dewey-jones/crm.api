@@ -32,7 +32,7 @@ namespace crmApi.Controllers
                 case "name":
                     return q.OrderBy(s => s.CompanyName);
                 case "rating":
-                    return q.OrderBy(s => s.Rating);
+                    return q.OrderBy(s => s.RatingValue);
             }
             return q.ToList();
         }
@@ -92,7 +92,7 @@ namespace crmApi.Controllers
             company.MailDate = item.MailDate;
             company.CallOn = item.CallOn;
             company.CompanyNotes = item.CompanyNotes;
-            company.Rating = item.Rating;
+            company.RatingValue = item.RatingValue;
             company.Nearby = item.Nearby;
             company.Appropriate = item.Appropriate;
             company.Consultants = item.Consultants;
