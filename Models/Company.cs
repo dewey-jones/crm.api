@@ -19,8 +19,8 @@ namespace crmApi.Models
         public string Phone { get; set; }
         public bool Contact { get; set; }
         public bool Mail { get; set; }
-        public DateTime MailDate { get; set; }
-        public DateTime CallOn { get; set; }
+        public Nullable<DateTime> MailDate { get; set; }
+        public Nullable<DateTime> CallOn { get; set; }
         public string CompanyNotes { get; set; }
         public Nullable<int> RatingValue { get; set; }
         public bool Nearby { get; set; }

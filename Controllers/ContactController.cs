@@ -21,7 +21,7 @@ namespace crmApi.Controllers
         }
 
         // GET: api/contact
-        [HttpGet]
+        [HttpGet("getAll")]
         public IEnumerable<Contact> GetAll()
         {
             return _context.Contacts.ToList();

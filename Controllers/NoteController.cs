@@ -20,11 +20,19 @@ namespace crmApi.Controllers
             _context = context;
         }
 
-        // GET: api/Note
+        // GET: api/note
         [HttpGet]
-        public IEnumerable<Note> GetNotes()
+        public IEnumerable<Note> GetAll([FromQuery] string sort = "none")
         {
-            return _context.Notes;
+            IQueryable<Note> q = _context.Notes.AsQueryable();
+            switch (sort.ToLower())
+            {
+                case "notetext":
+                    return q.OrderBy(s => s.NoteText);
+                case "contactdate":
+                    return q.OrderByDescending(s => s.ContactDate);
+            }
+            return q.ToList();
         }
 
         // GET: api/note/getByContact?contactId=4

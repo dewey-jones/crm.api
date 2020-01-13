@@ -15,12 +15,6 @@ namespace crmApi.Controllers
         public CompanyController(CrmContext context)
         {
             _context = context;
-
-            if (_context.Companies.Count() == 0)
-            {
-                _context.Companies.Add(new Company { CompanyName = "Company1" });
-                _context.SaveChanges();
-            }
         }
 
         // GET: api/company
